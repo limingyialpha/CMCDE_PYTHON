@@ -1,6 +1,6 @@
 """
 python implementation of Hilbert Schmidt Independence Criterion
-hsic_gam implements the HSIC test using a Gamma approximation
+hsic_gam implements the stats test using a Gamma approximation
 Python 2.7.12
 
 Gretton, A., Fukumizu, K., Teo, C. H., Song, L., Scholkopf, B., 

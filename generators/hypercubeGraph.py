@@ -1,4 +1,4 @@
-from dataGenerator import DataGenerator
+from generators.dataGenerator import DataGenerator
 import numpy as np
 
 

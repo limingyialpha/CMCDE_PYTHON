@@ -1,4 +1,4 @@
-from parameterizedDataGenerator import ParameterizedDataGenerator
+from generators.parameterizedDataGenerator import ParameterizedDataGenerator
 import numpy as np
 
 

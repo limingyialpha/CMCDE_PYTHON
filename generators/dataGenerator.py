@@ -1,6 +1,6 @@
 import numpy as np
 
-import generatorFactory
+from generators import generatorFactory
 import matplotlib.pyplot as plt
 
 
@@ -19,7 +19,7 @@ class DataGenerator:
         return f"{self.name}-{self.get_short_name()}-{self.dim}-{self.noise}"
 
     def get_points(self, n: int) -> np.ndarray:
-        return np.ndarray([])
+        pass
 
     # noise is actually standard deviation
     # in scala CMCDE, the noise is also standard deviation
