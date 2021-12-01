@@ -4,6 +4,7 @@ from datetime import datetime
 import socket
 import csv
 
+from typing import List
 
 
 class Experiment:
@@ -39,6 +40,20 @@ class Experiment:
         with open(self.summary_path, mode='a', newline='') as summary_file:
             summary_writer = csv.writer(summary_file, delimiter=',')
             summary_writer.writerow(content_array)
+
+    # python has another implementation of percentile as in scala, breeeze.
+    # This implementation is identical to the one in scala, breeze
+    # so that the experiment in scala and in python are comparable.
+    def percentile_scala_breeze(self, list_of_floats: List[float], p: float):
+        arr = sorted(list_of_floats)
+        f = (len(arr) + 1) * p
+        i = int(f)
+        if i == 0:
+            return arr[0]
+        elif i >= len(arr):
+            return arr[-1]
+        else:
+            return arr[i - 1] + (f - i) * (arr[i] - arr[i - 1])
 
 
 

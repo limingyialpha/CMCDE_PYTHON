@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\experiments_output\2021-11-23-17-28-15_PowerSymmetricHalf_\PowerSymmetricHalf.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
