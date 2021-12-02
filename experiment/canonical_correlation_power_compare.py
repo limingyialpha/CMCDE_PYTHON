@@ -150,13 +150,13 @@ class CanonicalCorrelationPowerCompare(experiment_template.Experiment):
                     self.info(
                         f"finished computing thresholds for estimator: {estimator}, observation number: {obs_num}, dimension: {dim}")
 
-                    # # computing the symmetric data set
-                    # with Pool(processes=self.level_of_parallelism) as pool:
-                    #     noises = [round(i / self.noise_level, self.noise_precision) for i in
-                    #               range(0, self.noise_level + 1)]
-                    #     task_inputs = [(estimator, obs_num, dim, noise,
-                    #                     threshold90, threshold95, threshold99) for noise in noises]
-                    #     pool.starmap(self.symmetric_task, task_inputs)
+                    # computing the symmetric data set
+                    with Pool(processes=self.level_of_parallelism) as pool:
+                        noises = [round(i / self.noise_level, self.noise_precision) for i in
+                                  range(0, self.noise_level + 1)]
+                        task_inputs = [(estimator, obs_num, dim, noise,
+                                        threshold90, threshold95, threshold99) for noise in noises]
+                        pool.starmap(self.symmetric_task, task_inputs)
 
                     # computing the asymmetric data set
                     with Pool(processes=self.level_of_parallelism) as pool:
