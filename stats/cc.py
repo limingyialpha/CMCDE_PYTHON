@@ -13,6 +13,8 @@ def canonical_correlation(estimator: str, data: np.ndarray, set_of_dims_1st: Set
         return hsic_cc(data, set_of_dims_1st, set_of_dims_2nd)
     elif estimator == "dcor":
         return dcor_cc(data, set_of_dims_1st, set_of_dims_2nd)
+    elif estimator == "rdc":
+        return rdc_cc(data, set_of_dims_1st, set_of_dims_2nd)
     else:
         raise Exception("Wrong test name!")
 
