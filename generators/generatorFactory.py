@@ -7,8 +7,9 @@ correspondances = {
     "hypercube" : "hc",
     "hypercubegraph" : "hcg",
     "hypersphere" : "hs",
-    "parabola" : "p",
+    "parabola2" : "p2",
     "sine" : "si",
     "star" : "st",
-    "zinv" : "zi"
+    "zinv" : "zi",
+    "linearperiodic": "lp",
 }

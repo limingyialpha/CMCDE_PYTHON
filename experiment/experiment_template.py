@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 from datetime import datetime
-import socket
 import csv
 
 from typing import List
@@ -17,15 +16,18 @@ class Experiment:
         self.dir_name = now.strftime("%Y-%m-%d-%H-%M-%S") + "_" + class_name + "_"
         self.experiment_folder = self.master_experiment_folder + "/" + self.dir_name
         Path(self.experiment_folder).mkdir(parents=True, exist_ok=True)
-        self.summary_path = self.experiment_folder + "/" + class_name + ".csv"
-        self.log_path = self.experiment_folder + "/" + class_name + ".log"
+        self.summary_path = self.experiment_folder + "/" + class_name + "_python" + ".csv"
+        self.log_path = self.experiment_folder + "/" + class_name + "_python" + ".log"
         logging.basicConfig(level=logging.INFO, filename=self.log_path,
                             format=f'%(asctime)s (process)d %(levelname)s {class_name} - %(message)s',
                             datefmt='%d-%b-%y %H:%M:%S')
-        self.info(f"Starting the experiment {class_name}")
-        self.info(f"Started on {socket.gethostname()}")
 
     def info(self, message: str):
+        # call the config again, so that we are sure that, even if we are in a subprocess,
+        # that the information will be logged centrally
+        logging.basicConfig(level=logging.INFO, filename=self.log_path,
+                            format=f'%(asctime)s (process)d %(levelname)s {type(self).__name__} - %(message)s',
+                            datefmt='%d-%b-%y %H:%M:%S')
         logging.info(message)
 
     def run(self):

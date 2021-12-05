@@ -26,7 +26,7 @@ class Parabola(ParameterizedDataGenerator):
             data[0] = pivot
             power = 2 + (2 * (scale - 1))
             for i in range(1, self.dim):
-                data[i] = np.power(data.sum(), power)
+                data[i] = np.power(sum(data), power)
             return noiseless_power_normalization(data, power)
 
         return np.array([get_point() for _ in range(n)])

@@ -10,7 +10,35 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\experiments_output\2021-11-23-13-47-07_PowerSymmetricHalf_\PowerSymmetricHalf.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\experiments_output\2021-11-23-17-28-15_PowerSymmetricHalf_\PowerSymmetricHalf.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\experiments_output\2021-12-02-18-12-07_CanonicalCorrelationPowerCompare_\CanonicalCorrelationPowerCompare.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\experiments_output\2021-12-04-14-07-06_CanonicalCorrelationPowerCompare_\CanonicalCorrelationPowerCompare.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\experiments_output\2021-12-05-14-51-30_CanonicalCorrelationPowerCompare_\CanonicalCorrelationPowerCompare_python.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

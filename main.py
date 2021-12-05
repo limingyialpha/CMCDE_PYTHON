@@ -1,7 +1,6 @@
-from experiment import canonical_correlation_power_compare
+from experiment.runtime import general_dependency_3_groups_dimension
 
 
 if __name__ == '__main__':
-    cc = canonical_correlation_power_compare.CanonicalCorrelationPowerCompare()
-    cc.run()
-
+    experi = general_dependency_3_groups_dimension.GeneralDependency3GroupsDimension()
+    experi.run()
