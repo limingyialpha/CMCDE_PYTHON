@@ -8,7 +8,6 @@ from datetime import datetime
 
 from experiment import experiment_template
 from generators import *
-import csv
 
 from generators import linearPeriodic
 from generators.independent import Independent
@@ -22,6 +21,8 @@ GMCDE is implemented in Python. See partner Repo.
 We look at different observation numbers, dimensions, noise levels,
 symmetric data distributions of all kinds
 """
+
+
 class GD3PowerM(experiment_template.Experiment):
 
     def __init__(self):

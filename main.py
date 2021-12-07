@@ -1,6 +1,6 @@
-from experiment.power import CCPowerM
+from experiment.power import GD3PowerM
 
 
 if __name__ == '__main__':
-    e = CCPowerM.CCPowerM()
+    e = GD3PowerM.GD3PowerM()
     e.run()
