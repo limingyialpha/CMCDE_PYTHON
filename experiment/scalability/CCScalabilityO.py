@@ -59,7 +59,7 @@ class CCScalabilityO(experiment_template.Experiment):
         self.write_summary_header(summary_header)
         for measure in self.measures:
             for obs_num in self.observation_nums_of_interest:
-                self.info(f"now dealing with observation number {obs_num}")
+                self.info(f"now dealing with measure: {measure}, observation number: {obs_num}")
                 with Pool(processes=self.level_of_parallelism) as pool:
                     task_inputs = [(measure, obs_num) for _ in
                                    range(0, self.repetitions)]

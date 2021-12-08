@@ -62,7 +62,7 @@ class CCScalabilityD(experiment_template.Experiment):
         self.write_summary_header(summary_header)
         for measure in self.measures:
             for dim in self.dimensions_of_interest:
-                self.info(f"now dealing with dimension: {dim}")
+                self.info(f"now dealing with measure: {measure}, dimension: {dim}")
                 gen_ins = self.gen(dim, self.noise)
                 set_of_dims_1st = set(range(0, int(dim / 2)))
                 set_of_dims_2nd = set(range(int(dim / 2), dim))
