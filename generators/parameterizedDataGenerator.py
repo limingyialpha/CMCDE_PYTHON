@@ -9,7 +9,7 @@ class ParameterizedDataGenerator(DataGenerator):
         self.param = param
 
     def get_id(self):
-        return f"{self.name}-{self.get_short_name()}-{self.param}-{self.dim}-{self.noise}"
+        return f"{self.name}-{self.get_short_name()}_{self.param}-{self.dim}-{self.noise}"
 
     @classmethod
     def test_plot_param(cls, param: float, n: int):
