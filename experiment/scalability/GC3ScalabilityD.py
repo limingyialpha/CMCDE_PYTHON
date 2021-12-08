@@ -14,7 +14,7 @@ from stats import gc
 from utils import stopwatch
 
 """
-This experiment analyse the scalability(CPU time) of different general dependency measures,
+This experiment analyse the scalability(CPU time) of different generalized contrast measures,
 with respect to dimensions.
 Only GMCDE is in scala, others are in Python partner repo.
 We look at Independent Uniform distribution.
@@ -25,7 +25,7 @@ We look at maximum 12 dimensions.
 """
 
 
-class GD3ScalabilityD(experiment_template.Experiment):
+class GC3ScalabilityD(experiment_template.Experiment):
     # data specific params
     gen = linear.Linear
     noise = 0
@@ -81,7 +81,7 @@ class GD3ScalabilityD(experiment_template.Experiment):
     def task(self, gen_ins: DataGenerator, measure, dim_groups):
         data = gen_ins.generate(self.observation_num)
         start = stopwatch.start_ms()
-        gc.general_dependency(measure, data, dim_groups)
+        gc.generalized_contrast(measure, data, dim_groups)
         end = stopwatch.stop_ms()
         cpu_time_ms = end - start
         return cpu_time_ms

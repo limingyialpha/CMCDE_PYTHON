@@ -23,7 +23,7 @@ symmetric data distributions of all kinds
 """
 
 
-class GD3PowerM(experiment_template.Experiment):
+class GC3PowerM(experiment_template.Experiment):
 
     def __init__(self):
         super().__init__()
@@ -112,7 +112,7 @@ class GD3PowerM(experiment_template.Experiment):
         sets = {set_of_dims_1st, set_of_dims_2nd, set_of_dims_3nd}
         benchmark_gen_ins = Independent(dim, 0)
         data = benchmark_gen_ins.generate(obs_num)
-        return gc.general_dependency(measure, data, sets)
+        return gc.generalized_contrast(measure, data, sets)
 
     def symmetric_task(self, measure: str, obs_num: int, dim: int, noise: float,
                        t90: float, t95: float, t99: float):
@@ -130,7 +130,7 @@ class GD3PowerM(experiment_template.Experiment):
             results = np.zeros(self.power_computation_iteration_num)
             for rep in range(self.power_computation_iteration_num):
                 data = gen_instance.generate(obs_num)
-                results[rep] = gc.general_dependency(measure, data, sets)
+                results[rep] = gc.generalized_contrast(measure, data, sets)
             power90 = sum([r > t90 for r in results]) / len(results)
             power95 = sum([r > t95 for r in results]) / len(results)
             power99 = sum([r > t99 for r in results]) / len(results)
