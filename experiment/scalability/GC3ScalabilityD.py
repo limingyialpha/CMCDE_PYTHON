@@ -50,7 +50,7 @@ class GC3ScalabilityD(experiment_template.Experiment):
         self.info(f"observation number: {self.observation_num}")
 
         self.info("Dependency measure specific params:")
-        self.info(f"General Dependency measures: {self.measures}")
+        self.info(f"Generalized Contrast measures: {self.measures}")
 
         self.info("Methodology specific params:")
         self.info(f"number of repetitions: {self.repetitions}")

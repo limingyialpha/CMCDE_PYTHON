@@ -69,7 +69,7 @@ class GC3PowerM(experiment_template.Experiment):
         self.info(f"observation numbers of interest: {self.observation_num_of_interest}")
 
         self.info("Dependency measure specific params:")
-        self.info(f"General Dependency measures: {self.measures}")
+        self.info(f"Generalized Contrast measures: {self.measures}")
 
         self.info("Methodology specific params:")
         self.info(f"number of iterations for power computation: {self.power_computation_iteration_num}")

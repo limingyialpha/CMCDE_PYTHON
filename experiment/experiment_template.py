@@ -13,7 +13,7 @@ class Experiment:
         Path(self.master_experiment_folder).mkdir(parents=True, exist_ok=True)
         class_name = type(self).__name__
         now = datetime.now()
-        self.dir_name = now.strftime("%Y-%m-%d-%H-%M-%S") + "_" + class_name + "_"
+        self.dir_name = now.strftime("%Y-%m-%d-%H-%M") + "_" + class_name + "_python"
         self.experiment_folder = self.master_experiment_folder + "/" + self.dir_name
         Path(self.experiment_folder).mkdir(parents=True, exist_ok=True)
         self.summary_path = self.experiment_folder + "/" + class_name + "_python" + ".csv"
