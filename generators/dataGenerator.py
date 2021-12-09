@@ -32,39 +32,21 @@ class DataGenerator:
         return self.get_points(n) + noises
 
     @classmethod
-    def test_plot(cls, n: int):
-        # 2d
+    def test_plot_2d(cls, n: int, noise: float):
         plt.figure(figsize=(12, 12))
-        gen = cls(2, 0)
+        gen = cls(2, noise)
         data = gen.generate(n)
         plt.scatter(data[:, 0], data[:, 1])
         plt.title("2d")
         plt.show()
 
-        # 3d
-        fig = plt.figure(figsize=(12, 12))
-        ax = fig.add_subplot(111, projection='3d')
-        gen = cls(3, 0)
-        data = gen.generate(n)
-        ax.scatter(data[:, 0], data[:, 1], data[:, 2])
-        plt.title("3d")
-        plt.show()
-
-        # 2d with noise 0.05
+    @classmethod
+    def test_plot_3d(cls, n: int, noise: float):
         plt.figure(figsize=(12, 12))
-        gen = cls(2, 0.05)
+        gen = cls(3, noise)
         data = gen.generate(n)
-        plt.scatter(data[:, 0], data[:, 1])
-        plt.title("2d noise 0.05")
-        plt.show()
-
-        # 3d with noise 0.05
-        fig = plt.figure(figsize=(12, 12))
-        ax = fig.add_subplot(111, projection='3d')
-        gen = cls(3, 0.05)
-        data = gen.generate(n)
-        ax.scatter(data[:, 0], data[:, 1], data[:, 2])
-        plt.title("3d noise 0.05")
+        plt.scatter(data[:, 0], data[:, 1], data[:, 2])
+        plt.title("3d")
         plt.show()
 
 

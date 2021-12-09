@@ -77,7 +77,7 @@ class GC3PowerM(experiment_template.Experiment):
 
         self.info(f"Started on {socket.gethostname()}")
 
-        summary_header = ["genId", "dim", "noise", "obs_num", "measure", "avg_cc", "std_cc", "power90", "power95",
+        summary_header = ["genId", "dim", "noise", "obs_num", "measure", "avg_gc", "std_gc", "power90", "power95",
                           "power99"]
         self.write_summary_header(summary_header)
 
