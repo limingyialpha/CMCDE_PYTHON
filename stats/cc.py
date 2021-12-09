@@ -5,15 +5,15 @@ from rdc import rdc
 import dcor
 import numpy as np
 
-measures = {"hsic", "dcor", "rdc"}
+measures = {"HSIC", "dCor", "RDC"}
 
 
 def canonical_correlation(measure: str, data: np.ndarray, set_of_dims_1st: Set[int], set_of_dims_2nd: Set[int]) -> bool:
-    if measure == "hsic":
+    if measure == "HSIC":
         return hsic_cc(data, set_of_dims_1st, set_of_dims_2nd)
-    elif measure == "dcor":
+    elif measure == "dCor":
         return dcor_cc(data, set_of_dims_1st, set_of_dims_2nd)
-    elif measure == "rdc":
+    elif measure == "RDC":
         return rdc_cc(data, set_of_dims_1st, set_of_dims_2nd)
     else:
         raise Exception("Wrong test name!")

@@ -33,7 +33,7 @@ class GC3ScalabilityO(experiment_template.Experiment):
     observation_nums_of_interest = [10, 20, 50, 100, 200, 300, 400, 500, 1000]
 
     # measure specific params
-    measures = {"dhsic"}
+    measures = {"dHSIC"}
 
     # methodology specific params
     repetitions = 500
