@@ -1,7 +1,4 @@
-from experiment.scalability.CCScalabilityD import CCScalabilityD
-from experiment.scalability.CCScalabilityO import CCScalabilityO
+from experiment.power.GC3PowerM import GC3PowerM
 
 if __name__ == '__main__':
-    CCScalabilityD().run()
-    CCScalabilityO().run()
-
+    GC3PowerM().run()
