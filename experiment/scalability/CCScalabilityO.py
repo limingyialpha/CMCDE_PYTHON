@@ -18,7 +18,6 @@ with respect to different observation numbers.
 Only GMCDE is in scala, others are in Python partner repo.
 We look at Independent Uniform distribution.
 Both first and second groups have 2 dimensions, total 4.
-We look at maximum 1000 observations.
 """
 
 
@@ -27,7 +26,7 @@ class CCScalabilityO(experiment_template.Experiment):
     gen = linear.Linear(4, 0)
     set_of_dims_1st = {0, 1}
     set_of_dims_2nd = {2, 3}
-    observation_nums_of_interest = [10, 20, 50, 100, 200, 300, 400, 500, 1000]
+    observation_nums_of_interest = [10, 20, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
 
     # measure specific params
     measures = {"RDC", "dCor", "HSIC"}

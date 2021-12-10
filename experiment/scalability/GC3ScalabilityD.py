@@ -21,7 +21,6 @@ We look at Independent Uniform distribution.
 We look at 3 groups of dimensions.
 Each group has equal number of dimensions 
 Observation number is 1000.
-We look at maximum 12 dimensions.
 """
 
 
@@ -29,7 +28,7 @@ class GC3ScalabilityD(experiment_template.Experiment):
     # data specific params
     gen = linear.Linear
     noise = 0
-    dimensions_of_interest = [3, 6, 9, 12]
+    dimensions_of_interest = [3, 6, 9, 12, 15]
     observation_num = 1000
 
     # measure specific params

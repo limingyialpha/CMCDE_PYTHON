@@ -20,7 +20,6 @@ Only GMCDE is in scala, others are in Python partner repo.
 We look at Independent Uniform distribution.
 Each group has equal number of dimensions 
 Observation number is 1000.
-We look at maximum 10 dimensions.
 """
 
 
@@ -28,7 +27,7 @@ class CCScalabilityD(experiment_template.Experiment):
     # data specific params
     gen = linear.Linear
     noise = 0
-    dimensions_of_interest = [2, 4, 6, 8, 10]
+    dimensions_of_interest = [2, 4, 6, 8, 10, 12, 14]
     observation_num = 1000
 
     # measure specific params
