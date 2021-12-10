@@ -87,6 +87,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\experiments_output\2021-12-10-13-56_Dilute_python\Dilute_python.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\experiments_output\2021-12-10-14-00_Duplicate_python\Duplicate_python.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

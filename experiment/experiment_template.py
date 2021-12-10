@@ -22,6 +22,7 @@ class Experiment:
                             format=f'%(asctime)s (process)d %(levelname)s {class_name} - %(message)s',
                             datefmt='%d-%b-%y %H:%M:%S')
 
+
     def info(self, message: str):
         # call the config again, so that we are sure that, even if we are in a subprocess,
         # that the information will be logged centrally

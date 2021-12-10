@@ -1,4 +1,4 @@
-from experiment.scalability.Scalability import Scalability
+from experiment.power.CCPowerM import CCPowerM
 
 if __name__ == '__main__':
-    Scalability().run()
+    CCPowerM().run()
