@@ -49,7 +49,7 @@ class CCPowerM(experiment_template.Experiment):
     observation_num_of_interest = [100, 1000]
 
     # measure specific params
-    measures = {"RDC", "dCor", "HSIC"}
+    measures = ["RDC", "dCor", "HSIC"]
 
     # methodology specific params
     power_computation_iteration_num = 500
