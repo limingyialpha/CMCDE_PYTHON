@@ -6,5 +6,4 @@ from experiment.power.GC3PowerM import GC3PowerM
 
 if __name__ == '__main__':
     output_folder = sys.argv[1]
-    CCPowerM(output_folder).run()
     GC3PowerM(output_folder).run()
