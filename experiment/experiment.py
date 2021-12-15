@@ -1,4 +1,5 @@
 import logging
+import sys
 from pathlib import Path
 from datetime import datetime
 import csv
@@ -7,29 +8,34 @@ from typing import List
 
 
 class Experiment:
-    master_experiment_folder = "E:\work\Project\CMCDE_PYTHON\experiments_output"
 
-    def __init__(self):
+    def __init__(self, output_folder: str):
+        self.output_folder = output_folder
+        self.master_experiment_folder = self.output_folder + '/experiments_output'
         Path(self.master_experiment_folder).mkdir(parents=True, exist_ok=True)
-        class_name = type(self).__name__
+        self.class_name = type(self).__name__
         now = datetime.now()
-        self.dir_name = now.strftime("%Y-%m-%d-%H-%M") + "_" + class_name + "_python"
+        self.dir_name = now.strftime("%Y-%m-%d-%H-%M") + "_" + self.class_name + "_python"
         self.experiment_folder = self.master_experiment_folder + "/" + self.dir_name
         Path(self.experiment_folder).mkdir(parents=True, exist_ok=True)
-        self.summary_path = self.experiment_folder + "/" + class_name + "_python" + ".csv"
-        self.log_path = self.experiment_folder + "/" + class_name + "_python" + ".log"
-        logging.basicConfig(level=logging.INFO, filename=self.log_path,
-                            format=f'%(asctime)s (process)d %(levelname)s {class_name} - %(message)s',
-                            datefmt='%d-%b-%y %H:%M:%S')
+        self.summary_path = self.experiment_folder + "/" + self.class_name + "_python" + ".csv"
+        self.log_path = self.experiment_folder + "/" + self.class_name + "_python" + ".log"
+        self.logger = logging.getLogger(self.class_name)
+        self.logger.setLevel(logging.INFO)
+        c_handler = logging.StreamHandler(sys.stdout)
+        c_handler.setLevel(logging.INFO)
+        c_format = logging.Formatter(f'%(asctime)s (process)d %(levelname)s {self.class_name} - %(message)s')
+        c_handler.setFormatter(c_format)
+        self.logger.addHandler(c_handler)
+        f_handler = logging.FileHandler(self.log_path)
+        f_handler.setLevel(logging.INFO)
+        f_format = logging.Formatter(f'%(asctime)s (process)d %(levelname)s {self.class_name} - %(message)s')
+        f_handler.setFormatter(f_format)
+        self.logger.addHandler(f_handler)
 
-
-    def info(self, message: str):
-        # call the config again, so that we are sure that, even if we are in a subprocess,
-        # that the information will be logged centrally
-        logging.basicConfig(level=logging.INFO, filename=self.log_path,
-                            format=f'%(asctime)s (process)d %(levelname)s {type(self).__name__} - %(message)s',
-                            datefmt='%d-%b-%y %H:%M:%S')
-        logging.info(message)
+        # logging.basicConfig(level=logging.INFO, filename=self.log_path,
+        #                     format=f'%(asctime)s (process)d %(levelname)s {class_name} - %(message)s',
+        #                     datefmt='%d-%b-%y %H:%M:%S')
 
     def run(self):
         pass
@@ -57,6 +63,3 @@ class Experiment:
             return arr[-1]
         else:
             return arr[i - 1] + (f - i) * (arr[i] - arr[i - 1])
-
-
-

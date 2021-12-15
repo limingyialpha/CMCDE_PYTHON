@@ -1,3 +1,4 @@
+import logging
 import multiprocessing
 
 import numpy as np
@@ -5,7 +6,7 @@ from multiprocessing import Pool
 import socket
 from datetime import datetime
 
-from experiment import experiment_template
+from experiment import experiment
 from generators import *
 
 from stats import cc
@@ -21,7 +22,11 @@ Both first and second groups have 2 dimensions, total 4.
 """
 
 
-class CCScalabilityO(experiment_template.Experiment):
+class CCScalabilityO(experiment.Experiment):
+
+    def __init__(self, output_folder):
+        super().__init__(output_folder)
+
     # data specific params
     gen = linear.Linear(4, 0)
     set_of_dims_1st = {0, 1}
@@ -37,28 +42,29 @@ class CCScalabilityO(experiment_template.Experiment):
     unit = "ms"
 
     def run(self):
+        logger = logging.getLogger(self.class_name)
         now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        self.info(f"{now} - Starting experiments - {type(self).__name__}")
+        logger.info(f"{now} - Starting experiments - {type(self).__name__}")
 
-        self.info("Data specific params:")
-        self.info(f"generator: {self.gen.get_id()}")
-        self.info(f"observation number of interest: {self.observation_nums_of_interest}")
+        logger.info("Data specific params:")
+        logger.info(f"generator: {self.gen.get_id()}")
+        logger.info(f"observation number of interest: {self.observation_nums_of_interest}")
 
-        self.info("Dependency measure specific params:")
-        self.info(f"Canonical Correlation measures: {self.measures}")
+        logger.info("Dependency measure specific params:")
+        logger.info(f"Canonical Correlation measures: {self.measures}")
 
-        self.info("Methodology specific params:")
-        self.info(f"number of repetitions: {self.repetitions}")
-        self.info(f"Level of parallelism: {self.level_of_parallelism}")
-        self.info(f"unit of scalability (cpu time): {self.unit}")
+        logger.info("Methodology specific params:")
+        logger.info(f"number of repetitions: {self.repetitions}")
+        logger.info(f"Level of parallelism: {self.level_of_parallelism}")
+        logger.info(f"unit of scalability (cpu time): {self.unit}")
 
-        self.info(f"Started on {socket.gethostname()}")
+        logger.info(f"Started on {socket.gethostname()}")
 
         summary_header = ["measure", "obs_num", "avg_cpu_time"]
         self.write_summary_header(summary_header)
         for measure in self.measures:
             for obs_num in self.observation_nums_of_interest:
-                self.info(f"now dealing with measure: {measure}, observation number: {obs_num}")
+                logger.info(f"now dealing with measure: {measure}, observation number: {obs_num}")
                 with Pool(processes=self.level_of_parallelism) as pool:
                     task_inputs = [(measure, obs_num) for _ in
                                    range(0, self.repetitions)]
@@ -67,7 +73,7 @@ class CCScalabilityO(experiment_template.Experiment):
                 summary_content = [measure, obs_num, avg_cpu_time]
                 self.write_summary_content(summary_content)
 
-        self.info(f"{now} - Finished experiments - {type(self).__name__}")
+        logger.info(f"{now} - Finished experiments - {type(self).__name__}")
 
     def task(self, measure, obs_num):
         data = self.gen.generate(obs_num)
