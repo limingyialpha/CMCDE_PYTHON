@@ -57,7 +57,7 @@ class CCPowerM(experiment.Experiment):
 
     # methodology specific params
     power_computation_iteration_num = 500
-    level_of_parallelism = multiprocessing.cpu_count() - 2
+    level_of_parallelism = multiprocessing.cpu_count() - 1
 
     def run(self):
         logger = logging.getLogger(self.class_name)
