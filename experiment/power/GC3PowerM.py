@@ -35,18 +35,18 @@ class GC3PowerM(experiment.Experiment):
 
     # data specific params
     gens = [
-        # linear.Linear,
-        # partial(doubleLinear.DoubleLinear, param=0.25),
-        # partial(linearPeriodic.LinearPeriodic, param=2),
-        # partial(sine.Sine, param=1),
-        # partial(sine.Sine, param=5),
-        # hypercube.Hypercube,
-        # hypercubeGraph.HypercubeGraph,
-        # hypersphere.HyperSphere,
-        # cross.Cross,
-        # star.Star,
-        # hourglass.Hourglass,
-        # zinv.Zinv,
+        linear.Linear,
+        partial(doubleLinear.DoubleLinear, param=0.25),
+        partial(linearPeriodic.LinearPeriodic, param=2),
+        partial(sine.Sine, param=1),
+        partial(sine.Sine, param=5),
+        hypercube.Hypercube,
+        hypercubeGraph.HypercubeGraph,
+        hypersphere.HyperSphere,
+        cross.Cross,
+        star.Star,
+        hourglass.Hourglass,
+        zinv.Zinv,
         Independent
     ]
     dimensions_of_interest = [6, 9, 12, 15]
@@ -59,6 +59,7 @@ class GC3PowerM(experiment.Experiment):
 
     # methodology specific params
     power_computation_iteration_num = 500
+    benchmark_iteration_num = 10000
     level_of_parallelism = multiprocessing.cpu_count() - 1
 
     def run(self):
@@ -78,6 +79,7 @@ class GC3PowerM(experiment.Experiment):
 
         logger.info("Methodology specific params:")
         logger.info(f"number of iterations for power computation: {self.power_computation_iteration_num}")
+        logger.info(f"number of iterations for benchmark: {self.benchmark_iteration_num}")
         logger.info(f"Level of parallelism: {self.level_of_parallelism}")
 
         logger.info(f"Started on {socket.gethostname()}")
@@ -94,7 +96,7 @@ class GC3PowerM(experiment.Experiment):
                         f"now computing thresholds for measure: {measure}, observation number: {obs_num}, dimension: {dim}")
                     with Pool(processes=self.level_of_parallelism) as pool:
                         task_inputs = [(measure, obs_num, dim)
-                                       for _ in range(self.power_computation_iteration_num)]
+                                       for _ in range(self.benchmark_iteration_num)]
                         results = pool.starmap(self.benchmark_task, task_inputs)
                     threshold90 = self.percentile_scala_breeze(results, 0.90)
                     threshold95 = self.percentile_scala_breeze(results, 0.95)
