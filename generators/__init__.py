@@ -1,2 +1,2 @@
 __all__ = ["cross", "doubleLinear", "hourglass", "hypercube", "hypercubeGraph", "hypersphere",
-           "independent", "linear", "sine", "star", "zinv", "generatorFactory", "doubleLinear"]
+           "independent", "linear", "sine", "star", "zinv", "generatorFactory", "doubleLinear", "groupsOfLinears"]

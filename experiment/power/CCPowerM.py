@@ -45,7 +45,8 @@ class CCPowerM(experiment.Experiment):
         star.Star,
         hourglass.Hourglass,
         zinv.Zinv,
-        Independent
+        Independent,
+        partial(groupsOfLinears.GroupsOfLinears, param = 2)
     ]
     dimensions_of_interest = [4, 8, 12, 16]
     noise_levels = 30

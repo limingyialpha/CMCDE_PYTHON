@@ -47,7 +47,8 @@ class GC3PowerM(experiment.Experiment):
         star.Star,
         hourglass.Hourglass,
         zinv.Zinv,
-        Independent
+        Independent,
+        partial(groupsOfLinears.GroupsOfLinears, param=3)
     ]
     dimensions_of_interest = [6, 9, 12, 15]
     noise_levels = 30
