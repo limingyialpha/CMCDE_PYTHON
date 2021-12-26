@@ -1,12 +1,14 @@
 import logging
 import sys
 
+from experiment.dependencies.Dependencies import Dependencies
 from experiment.power.CCPowerM import CCPowerM
 from experiment.power.GC3PowerM import GC3PowerM
 from experiment.sanity.Sanity import Sanity
 from experiment.scalability.Scalability import Scalability
 
 experiments_names = [
+    "Dependencies",
     "Sanity",
     "Scalability",
     "CCPowerM",
@@ -14,6 +16,7 @@ experiments_names = [
 ]
 
 experiments_dictionary = {
+    "Dependencies": Dependencies,
     "Sanity": Sanity,
     "Scalability": Scalability,
     "CCPowerM": CCPowerM,
