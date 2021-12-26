@@ -1,9 +1,7 @@
 import sys
-
-from experiment.sanity.Sanity import Sanity
-from experiment.power.CCPowerM import CCPowerM
-from experiment.power.GC3PowerM import GC3PowerM
+from experiment import factory
 
 if __name__ == '__main__':
-    output_folder = sys.argv[1]
-    GC3PowerM(output_folder).run()
+    experiment = sys.argv[1]
+    output_folder = sys.argv[2]
+    factory.run(experiment, output_folder)
