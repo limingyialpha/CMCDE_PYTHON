@@ -6,6 +6,13 @@ from experiment.power.GC3PowerM import GC3PowerM
 from experiment.sanity.Sanity import Sanity
 from experiment.scalability.Scalability import Scalability
 
+experiments_names = [
+    "Sanity",
+    "Scalability",
+    "CCPowerM",
+    "GC3PowerM"
+]
+
 experiments_dictionary = {
     "Sanity": Sanity,
     "Scalability": Scalability,
@@ -16,7 +23,6 @@ experiments_dictionary = {
 
 def run(experiment: str, output_folder: str):
     if experiment == "all":
-        names = list(experiments_dictionary.keys())
         logger = logging.getLogger("factory")
         logger.setLevel(logging.INFO)
         c_handler = logging.StreamHandler(sys.stdout)
@@ -25,12 +31,12 @@ def run(experiment: str, output_folder: str):
         c_handler.setFormatter(c_format)
         logger.addHandler(c_handler)
         logger.info("Now running all the experiments:")
-        logger.info(names)
-        for name in names:
+        logger.info(experiments_names)
+        for name in experiments_names:
             exp = experiments_dictionary[name]
             exp(output_folder).run()
         logger.info("Finished all experiments.")
-    elif experiment not in experiments_dictionary.keys():
+    elif experiment not in experiments_names:
         raise RuntimeError('Wrong experiment name!')
     else:
         experiments_dictionary[experiment](output_folder).run()
