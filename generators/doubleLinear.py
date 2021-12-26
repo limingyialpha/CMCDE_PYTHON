@@ -13,7 +13,7 @@ class DoubleLinear(ParameterizedDataGenerator):
             pivot = np.random.random()
             raw_points = np.repeat(pivot, self.dim)
             coef = self.param
-            mask = np.array([1 if (i >= 2 and np.random.randint(2) == 0) else coef for i in range(1, self.dim + 1)])
+            mask = np.array([coef if (i >= 2 and np.random.randint(2) == 0) else 1 for i in range(1, self.dim + 1)])
             return raw_points * mask
 
         return np.array([get_point() for _ in range(n)])
