@@ -7,10 +7,10 @@ from experiment.sanity.Sanity import Sanity
 from experiment.scalability.Scalability import Scalability
 
 experiments_dictionary = {
-    "CCPowerM": CCPowerM,
-    "GC3PowerM": GC3PowerM,
     "Sanity": Sanity,
-    "Scalability": Scalability
+    "Scalability": Scalability,
+    "CCPowerM": CCPowerM,
+    "GC3PowerM": GC3PowerM
 }
 
 
