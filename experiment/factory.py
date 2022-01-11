@@ -1,5 +1,6 @@
 import logging
 import sys
+from typing import List
 
 from experiment.dependencies.Dependencies import Dependencies
 from experiment.power.CCPowerM import CCPowerM
@@ -24,8 +25,10 @@ experiments_dictionary = {
 }
 
 
-def run(experiment: str, output_folder: str):
-    if experiment == "all":
+def run(experiments: List[str], output_folder: str):
+    if len(experiments) == 0:
+        raise RuntimeError('No experiments given!')
+    elif len(experiments) == 1 and experiments[0] == "all":
         logger = logging.getLogger("factory")
         logger.setLevel(logging.INFO)
         c_handler = logging.StreamHandler(sys.stdout)
@@ -33,13 +36,16 @@ def run(experiment: str, output_folder: str):
         c_format = logging.Formatter(f'%(asctime)s (process)d %(levelname)s "facotry" - %(message)s')
         c_handler.setFormatter(c_format)
         logger.addHandler(c_handler)
-        logger.info("Now running all the experiments:")
+        logger.info("Now running ALL experiments:")
         logger.info(experiments_names)
         for name in experiments_names:
             exp = experiments_dictionary[name]
             exp(output_folder).run()
-        logger.info("Finished all experiments.")
-    elif experiment not in experiments_names:
-        raise RuntimeError('Wrong experiment name!')
+        logger.info("Finished ALL experiments.")
     else:
-        experiments_dictionary[experiment](output_folder).run()
+        correct = all(e in experiments_names for e in experiments)
+        if correct:
+            for e in experiments:
+                experiments_dictionary[e](output_folder).run()
+        else:
+            raise RuntimeError("Wrong experiment name (names)!")
