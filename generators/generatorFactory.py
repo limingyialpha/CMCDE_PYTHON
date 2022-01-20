@@ -12,4 +12,5 @@ correspondances = {
     "star" : "st",
     "zinv" : "zi",
     "linearperiodic": "lp",
+    "groupsOfLinears": "gl"
 }

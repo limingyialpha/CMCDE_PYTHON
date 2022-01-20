@@ -3,7 +3,7 @@ import numpy as np
 
 
 class GroupsOfLinears(ParameterizedDataGenerator):
-    name = "groups_of_linears"
+    name = "groupsOfLinears"
 
     def __init__(self, dim, noise, param):
         super().__init__(dim, noise, param)
