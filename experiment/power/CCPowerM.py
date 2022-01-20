@@ -58,7 +58,7 @@ class CCPowerM(experiment.Experiment):
 
     # methodology specific params
     power_computation_iteration_num = 500
-    benchmark_iteration_num = 10000
+    benchmark_iteration_num = 2500
     level_of_parallelism = multiprocessing.cpu_count() - 1
 
     def run(self):
