@@ -69,7 +69,7 @@ class GC3PowerM(experiment.Experiment):
         logger.info(f"{now} - Starting experiments - {type(self).__name__}")
 
         logger.info("Data specific params:")
-        gen_names = [gen(2, 0).name for gen in self.gens]
+        gen_names = [gen(3, 0).name for gen in self.gens]
         logger.info(f"generators of interest for undiluted distributions: {gen_names}")
         logger.info(f"dimensions of interest: {self.dimensions_of_interest}")
         logger.info(f"noise levels: {self.noise_levels}")

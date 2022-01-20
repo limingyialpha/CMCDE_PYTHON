@@ -1,5 +1,6 @@
 import logging
 import sys
+from typing import List
 
 from experiment.dependencies.Dependencies import Dependencies
 from experiment.power.CCPowerM import CCPowerM
@@ -24,7 +25,7 @@ experiments_dictionary = {
 }
 
 
-def run(experiments, output_folder: str):
+def run(experiments: List[str], output_folder: str):
     if len(experiments) == 0:
         raise RuntimeError('No experiments given!')
     elif len(experiments) == 1 and experiments[0] == "all":
