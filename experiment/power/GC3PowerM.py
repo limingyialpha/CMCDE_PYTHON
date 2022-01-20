@@ -22,7 +22,7 @@ The general case we are looking at is:
 Dependency between 3 groups of dimensions.
 GMCDE is implemented in Python. See partner Repo.
 We look at different observation numbers, dimensions, noise levels,
-symmetric data distributions of all kinds
+undiluted data distributions of all kinds
 """
 
 
@@ -70,7 +70,7 @@ class GC3PowerM(experiment.Experiment):
 
         logger.info("Data specific params:")
         gen_names = [gen(2, 0).name for gen in self.gens]
-        logger.info(f"generators of interest for both symmetric and asymmetric distributions: {gen_names}")
+        logger.info(f"generators of interest for undiluted distributions: {gen_names}")
         logger.info(f"dimensions of interest: {self.dimensions_of_interest}")
         logger.info(f"noise levels: {self.noise_levels}")
         logger.info(f"observation numbers of interest: {self.observation_num_of_interest}")
@@ -105,11 +105,11 @@ class GC3PowerM(experiment.Experiment):
                     logger.info(
                         f"finished computing thresholds for measure: {measure}, observation number: {obs_num}, dimension: {dim}")
 
-                    # computing the symmetric data set
+                    # computing the undiluted data set
                     with Pool(processes=self.level_of_parallelism) as pool:
                         task_inputs = [(measure, obs_num, dim, noise,
                                         threshold90, threshold95, threshold99) for noise in self.noises_of_interest]
-                        pool.starmap(self.symmetric_task, task_inputs)
+                        pool.starmap(self.undiluted_task, task_inputs)
 
         logger.info(f"{now} - Finished experiments - {type(self).__name__}")
 
@@ -122,7 +122,7 @@ class GC3PowerM(experiment.Experiment):
         data = benchmark_gen_ins.generate(obs_num)
         return gc.generalized_contrast(measure, data, sets)
 
-    def symmetric_task(self, measure: str, obs_num: int, dim: int, noise: float,
+    def undiluted_task(self, measure: str, obs_num: int, dim: int, noise: float,
                        t90: float, t95: float, t99: float):
         # This block of code is included to deal with logging with multiprocessing
         # We instantiate a new logger for each new process
@@ -142,7 +142,7 @@ class GC3PowerM(experiment.Experiment):
         # the end of the block
 
         logger.info(
-            f"now dealing with gens: symmetric, measure: {measure}, observation number: {obs_num}, dimension: {dim}, noise {noise}")
+            f"now dealing with gens: undiluted, measure: {measure}, observation number: {obs_num}, dimension: {dim}, noise {noise}")
         set_of_dims_1st = frozenset(range(0, int(dim / 3)))
         set_of_dims_2nd = frozenset(range(int(dim / 3), int(dim / 3 * 2)))
         set_of_dims_3nd = frozenset(range(int(dim / 3 * 2), int(dim)))

@@ -20,7 +20,7 @@ from stats import cc
 Compare the power of competitors in canonical correlation case with GMCDE.
 GMCDE is implemented in Scala. See partner Repo.
 We look at different observation numbers, dimensions, noise levels,
-symmetric/asymmetric data distributions of all kinds
+undiluted data distributions of all kinds
 """
 
 
@@ -68,7 +68,7 @@ class CCPowerM(experiment.Experiment):
 
         logger.info("Data specific params:")
         gen_names = [gen(2, 0).name for gen in self.gens]
-        logger.info(f"generators of interest for both symmetric and asymmetric distributions: {gen_names}")
+        logger.info(f"generators of interest for undiluted distributions: {gen_names}")
         logger.info(f"dimensions of interest: {self.dimensions_of_interest}")
         logger.info(f"noise levels: {self.noise_levels}")
         logger.info(f"observation numbers of interest: {self.observation_num_of_interest}")
@@ -83,7 +83,7 @@ class CCPowerM(experiment.Experiment):
 
         logger.info(f"Started on {socket.gethostname()}")
 
-        summary_header = ["genId", "type", "dim", "noise", "obs_num", "measure", "avg_cc", "std_cc", "power90",
+        summary_header = ["genId", "dim", "noise", "obs_num", "measure", "avg_cc", "std_cc", "power90",
                           "power95",
                           "power99"]
         self.write_summary_header(summary_header)
@@ -104,11 +104,11 @@ class CCPowerM(experiment.Experiment):
                     logger.info(
                         f"finished computing thresholds for measure: {measure}, observation number: {obs_num}, dimension: {dim}")
 
-                    # computing the symmetric data set
+                    # computing the undiluted data set
                     with Pool(processes=self.level_of_parallelism) as pool:
                         task_inputs = [(measure, obs_num, dim, noise,
                                         threshold90, threshold95, threshold99) for noise in self.noises_of_interest]
-                        pool.starmap(self.symmetric_task, task_inputs)
+                        pool.starmap(self.undiluted_task, task_inputs)
         logger.info(f"{now} - Finished experiments - {type(self).__name__}")
 
     def benchmark_task(self, measure: str, obs_num: int, dim: int):
@@ -118,7 +118,7 @@ class CCPowerM(experiment.Experiment):
         data = benchmark_gen_ins.generate(obs_num)
         return cc.canonical_correlation(measure, data, set_of_dims_1st, set_of_dims_2nd)
 
-    def symmetric_task(self, measure: str, obs_num: int, dim: int, noise: float,
+    def undiluted_task(self, measure: str, obs_num: int, dim: int, noise: float,
                        t90: float, t95: float, t99: float):
         # This block of code is included to deal with logging with multiprocessing
         # We instantiate a new logger for each new process
@@ -138,7 +138,7 @@ class CCPowerM(experiment.Experiment):
         # the end of the block
 
         logger.info(
-            f"now dealing with gens: symmetric, measure: {measure}, observation number: {obs_num}, dimension: {dim}, noise {noise}")
+            f"now dealing with gens: undiluted, measure: {measure}, observation number: {obs_num}, dimension: {dim}, noise {noise}")
         set_of_dims_1st = set(range(0, int(dim / 2)))
         set_of_dims_2nd = set(range(int(dim / 2), dim))
         # to avoid some stupid warnings in dcor, we take 0 as 0.0001
@@ -157,7 +157,7 @@ class CCPowerM(experiment.Experiment):
             std_cc = np.std(results)
             # in writing , we need to write 0.0001 back to 0
             noise_to_write = 0 if noise == stub else noise
-            summary_content = [gen_instance.get_id(), "sy", dim, noise_to_write, obs_num, measure, avg_cc, std_cc,
+            summary_content = [gen_instance.get_id(), dim, noise_to_write, obs_num, measure, avg_cc, std_cc,
                                power90,
                                power95,
                                power99]
