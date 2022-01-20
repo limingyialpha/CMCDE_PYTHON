@@ -46,7 +46,7 @@ class CCPowerM(experiment.Experiment):
         hourglass.Hourglass,
         zinv.Zinv,
         Independent,
-        partial(groupsOfLinears.GroupsOfLinears, param = 2)
+        partial(groupsOfLinears.GroupsOfLinears, param=2)
     ]
     dimensions_of_interest = [4, 8, 12, 16]
     noise_levels = 30
@@ -109,12 +109,6 @@ class CCPowerM(experiment.Experiment):
                         task_inputs = [(measure, obs_num, dim, noise,
                                         threshold90, threshold95, threshold99) for noise in self.noises_of_interest]
                         pool.starmap(self.symmetric_task, task_inputs)
-
-                    # computing the asymmetric data set
-                    with Pool(processes=self.level_of_parallelism) as pool:
-                        task_inputs = [(measure, obs_num, dim, noise,
-                                        threshold90, threshold95, threshold99) for noise in self.noises_of_interest]
-                        pool.starmap(self.asymmetric_task, task_inputs)
         logger.info(f"{now} - Finished experiments - {type(self).__name__}")
 
     def benchmark_task(self, measure: str, obs_num: int, dim: int):
@@ -164,54 +158,6 @@ class CCPowerM(experiment.Experiment):
             # in writing , we need to write 0.0001 back to 0
             noise_to_write = 0 if noise == stub else noise
             summary_content = [gen_instance.get_id(), "sy", dim, noise_to_write, obs_num, measure, avg_cc, std_cc,
-                               power90,
-                               power95,
-                               power99]
-            self.write_summary_content(summary_content)
-
-    def asymmetric_task(self, measure: str, obs_num: int, dim: int, noise: float,
-                        t90: float, t95: float, t99: float):
-        # This block of code is included to deal with logging with multiprocessing
-        # We instantiate a new logger for each new process
-        # the start of the block
-        logger = logging.getLogger(str(random()))
-        logger.setLevel(logging.INFO)
-        c_handler = logging.StreamHandler(sys.stdout)
-        c_handler.setLevel(logging.INFO)
-        c_format = logging.Formatter(f'%(asctime)s (process)d %(levelname)s {self.class_name} - %(message)s')
-        c_handler.setFormatter(c_format)
-        logger.addHandler(c_handler)
-        f_handler = logging.FileHandler(self.log_path)
-        f_handler.setLevel(logging.INFO)
-        f_format = logging.Formatter(f'%(asctime)s (process)d %(levelname)s {self.class_name} - %(message)s')
-        f_handler.setFormatter(f_format)
-        logger.addHandler(f_handler)
-        # the end of the block
-
-        logger.info(
-            f"now dealing with gens: asymmetric, measure: {measure}, observation number: {obs_num}, dimension: {dim}, noise {noise}")
-        # to avoid some stupid warnings in dcor, we take 0 as 0.0001
-        stub = 0.0001
-        noise = stub if noise == 0 else noise
-        for gen in self.gens:
-            gen_instance = gen(int(dim / 2), noise)
-            asymmetry = Independent(int(dim / 2), noise)
-            results = np.zeros(self.power_computation_iteration_num)
-            for rep in range(self.power_computation_iteration_num):
-                data_sy = gen_instance.generate(obs_num)
-                data_asy = asymmetry.generate(obs_num)
-                data = np.concatenate((data_sy, data_asy), axis=1)
-                set_of_dims_1st = set(range(0, int(dim / 4))).union(range(int(dim / 2), int(dim / 4 * 3)))
-                set_of_dims_2nd = set(range(0, dim)) - set_of_dims_1st
-                results[rep] = cc.canonical_correlation(measure, data, set_of_dims_1st, set_of_dims_2nd)
-            power90 = sum([r > t90 for r in results]) / len(results)
-            power95 = sum([r > t95 for r in results]) / len(results)
-            power99 = sum([r > t99 for r in results]) / len(results)
-            avg_cc = np.mean(results)
-            std_cc = np.std(results)
-            # in writing , we need to write 0.0001 back to 0
-            noise_to_write = 0 if noise == stub else noise
-            summary_content = [gen_instance.get_id(), "asy", dim, noise_to_write, obs_num, measure, avg_cc, std_cc,
                                power90,
                                power95,
                                power99]

@@ -33,10 +33,6 @@ class Experiment:
         f_handler.setFormatter(f_format)
         self.logger.addHandler(f_handler)
 
-        # logging.basicConfig(level=logging.INFO, filename=self.log_path,
-        #                     format=f'%(asctime)s (process)d %(levelname)s {class_name} - %(message)s',
-        #                     datefmt='%d-%b-%y %H:%M:%S')
-
     def run(self):
         pass
 
