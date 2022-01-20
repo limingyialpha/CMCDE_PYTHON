@@ -51,7 +51,7 @@ class CCPowerM(experiment.Experiment):
     dimensions_of_interest = [4, 8, 12, 16]
     noise_levels = 30
     noise_precision = 2
-    observation_num_of_interest = [100, 1000]
+    observation_num_of_interest = [1000]
 
     # measure specific params
     measures = ["RDC", "dCor", "HSIC"]

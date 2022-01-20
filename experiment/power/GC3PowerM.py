@@ -53,7 +53,7 @@ class GC3PowerM(experiment.Experiment):
     dimensions_of_interest = [6, 9, 12, 15]
     noise_levels = 30
     noise_precision = 2
-    observation_num_of_interest = [100, 1000]
+    observation_num_of_interest = [1000]
 
     # measure specific params
     measures = ["dHSIC"]
