@@ -31,13 +31,13 @@ class CCScalabilityO(experiment.Experiment):
     gen = linear.Linear(4, 0)
     set_of_dims_1st = {0, 1}
     set_of_dims_2nd = {2, 3}
-    observation_nums_of_interest = [10, 20, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
+    observation_nums_of_interest = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
 
     # measure specific params
     measures = {"RDC", "dCor", "HSIC"}
 
     # methodology specific params
-    repetitions = 500
+    repetitions = 10000
     level_of_parallelism = multiprocessing.cpu_count() - 1
     unit = "ms"
 

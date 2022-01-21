@@ -34,13 +34,13 @@ class GC3ScalabilityO(experiment.Experiment):
     set_of_dims_2nd = frozenset([2, 3])
     set_of_dims_3rd = frozenset([4, 5])
     dim_groups = {set_of_dims_1st, set_of_dims_2nd, set_of_dims_3rd}
-    observation_nums_of_interest = [10, 20, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
+    observation_nums_of_interest = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
 
     # measure specific params
     measures = {"dHSIC"}
 
     # methodology specific params
-    repetitions = 500
+    repetitions = 10000
     level_of_parallelism = multiprocessing.cpu_count() - 1
     unit = "ms"
 

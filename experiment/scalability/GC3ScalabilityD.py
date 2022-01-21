@@ -40,7 +40,7 @@ class GC3ScalabilityD(experiment.Experiment):
     measures = {"dHSIC"}
 
     # methodology specific params
-    repetitions = 500
+    repetitions = 10000
     level_of_parallelism = multiprocessing.cpu_count() - 1
     unit = "ms"
 

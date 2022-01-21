@@ -39,7 +39,7 @@ class CCScalabilityD(experiment.Experiment):
     measures = {"RDC", "dCor", "HSIC"}
 
     # methodology specific params
-    repetitions = 500
+    repetitions = 10000
     level_of_parallelism = multiprocessing.cpu_count() - 1
     unit = "ms"
 
