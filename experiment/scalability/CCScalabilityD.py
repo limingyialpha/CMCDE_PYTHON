@@ -36,7 +36,7 @@ class CCScalabilityD(experiment.Experiment):
     observation_num = 1000
 
     # measure specific params
-    measures = {"RDC", "dCor", "HSIC"}
+    measures = {"RDC", "dCor", "dHSIC"}
 
     # methodology specific params
     repetitions = 10000
